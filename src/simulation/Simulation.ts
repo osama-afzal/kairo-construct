@@ -1,4 +1,4 @@
-import { Orb } from "./Orb";
+import { Neighbor, Orb } from "./Orb";
 
 export class Simulation {
   private width: number;
@@ -24,6 +24,10 @@ export class Simulation {
 
   update() {
     for (const orb of this.orbs) {
+      orb.neighbors = this.sense(orb);
+    }
+
+    for (const orb of this.orbs) {
       orb.x += orb.vx;
       orb.y += orb.vy;
 
@@ -43,5 +47,29 @@ export class Simulation {
         orb.vy *= -1;
       }
     }
+  }
+
+  private sense(orb: Orb): Neighbor[] {
+    const neighbors: Neighbor[] = [];
+
+    for (const other of this.orbs) {
+      if (other.id === orb.id) continue;
+
+      const dx = other.x - orb.x;
+      const dy = other.y - orb.y;
+
+      const distance = Math.hypot(dx, dy);
+
+      if (distance < 120) {
+        neighbors.push({
+          id: other.id,
+          distance,
+          dx,
+          dy,
+        });
+      }
+    }
+
+    return neighbors;
   }
 }
