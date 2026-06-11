@@ -4,8 +4,7 @@ import { Simulation } from "./simulation/Simulation";
 function App() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
-  const [hoveredOrbId, setHoveredOrbId] = useState<number | null>(null);
-  const [selectedOrbId, setSelectedOrbId] = useState<number | null>(null);
+  const [_, setSelectedOrbId] = useState<number | null>(null);
 
   const simRef = useRef<Simulation | null>(null);
   const [, setTick] = useState(0);
@@ -16,7 +15,6 @@ function App() {
   const selectedRef = useRef<number | null>(null);
 
   const hoverFadeRef = useRef(0);
-  const currentFrameRef = useRef(0);
 
   const hoverGlowRef = useRef(0);
   const selectGlowRef = useRef(0);
@@ -429,9 +427,9 @@ function App() {
             <div>
               GAZE_STAT:{" "}
               <span
-                style={{ color: activeOrb.isInspected ? "#ffb000" : "#bfe6ff" }}
+                style={{ color: activeOrb.isInspected ? "#00a008" : "#bfe6ff" }}
               >
-                {activeOrb.isInspected ? "CONTAMINATED" : "PASSIVE_SCAN"}
+                {activeOrb.isInspected ? "INSPECTING" : "PASSIVE_SCAN"}
               </span>
             </div>
           </div>
