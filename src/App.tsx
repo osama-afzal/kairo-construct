@@ -340,7 +340,7 @@ function App() {
     }
 
     if (orb.isInspected && orb.surveillanceTimer > 180) {
-      return "GAZE_PRESSURE_DETECTION // SUBJECT_IS_MASKING";
+      return "GAZE_PRESSURE_DETECTION // SUBJECT_UNDER_SURVEILLANCE";
     }
 
     switch (orb.attachmentStyle) {
@@ -414,13 +414,7 @@ function App() {
 
           <br />
 
-          <div
-            style={{
-              marginTop: 6,
-              paddingTop: 6,
-              borderTop: "1px dashed rgba(140, 200, 255, 0.15)",
-            }}
-          >
+          <div>
             <div>
               GAZE_TIME: {(activeOrb.surveillanceTimer * 16.67).toFixed(0)} us
             </div>
@@ -429,7 +423,7 @@ function App() {
               <span
                 style={{ color: activeOrb.isInspected ? "#00a008" : "#bfe6ff" }}
               >
-                {activeOrb.isInspected ? "INSPECTING" : "PASSIVE_SCAN"}
+                {activeOrb.isInspected ? "ACTIVE_SCAN" : "PASSIVE_SCAN"}
               </span>
             </div>
           </div>
@@ -439,8 +433,6 @@ function App() {
           <div style={{ marginTop: 8, opacity: 0.7 }}>
             NEIGHBORS: {activeOrb.neighbors?.length ?? 0}
           </div>
-
-          <br />
 
           <div
             style={{
